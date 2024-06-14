@@ -141,7 +141,7 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     self.applyInitialCroppedImageFrame = NO;
     self.editing = NO;
     self.cropBoxResizeEnabled = !circularMode;
-    self.aspectRatio = circularMode ? (CGSize){1.0f, 1.0f} : CGSizeZero;
+    self.aspectRatio = (CGSize){1.0f, 1.0f};
     self.resetAspectRatioEnabled = !circularMode;
     self.restoreImageCropFrame = CGRectZero;
     self.restoreAngle = 0;
@@ -1009,10 +1009,10 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     self.gridOverlayView.frame = _cropBoxFrame; //set the new overlay view to match the same region
     
     // If the mask layer is present, adjust its transform to fit the new container view size
-    if (self.croppingStyle == TOCropViewCroppingStyleCircular) {
+    // if (self.croppingStyle == TOCropViewCroppingStyleCircular) {
         CGFloat halfWidth = self.foregroundContainerView.frame.size.width * 0.5f;
         self.foregroundContainerView.layer.cornerRadius = halfWidth;
-    }
+    // }
     
     //reset the scroll view insets to match the region of the new crop rect
     self.scrollView.contentInset = (UIEdgeInsets){CGRectGetMinY(_cropBoxFrame),
@@ -1267,9 +1267,9 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     CGFloat duration = editing ? 0.05f : 0.35f;
     CGFloat delay = editing? 0.0f : 0.35f;
     
-    if (self.croppingStyle == TOCropViewCroppingStyleCircular) {
+    // if (self.croppingStyle == TOCropViewCroppingStyleCircular) {
         delay = 0.0f;
-    }
+    // }
     
     [UIView animateKeyframesWithDuration:duration delay:delay options:0 animations:^{
         [self toggleTranslucencyViewVisible:!editing];
